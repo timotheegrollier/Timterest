@@ -62,15 +62,14 @@ class PinsController extends AbstractController
 
 
  /**
-     * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit" ,methods={"GET","POST","PUT"})
+     * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit" ,methods={"GET","PUT"})
      */
     public function edit(Request $request,Pin $pin,EntityManagerInterface $em):Response
     {
 
-        $form = $this->createFormBuilder($pin)
+        $form = $this->createFormBuilder($pin,["method"=>"PUT"])
         ->add('title',TextType::class)
         ->add('description',TextareaType::class)
-        ->setMethod('PUT')
         ->getForm()
         ;
 
@@ -90,14 +89,19 @@ class PinsController extends AbstractController
 
 
     /**
-     * @Route("/pins/{id<[0-9]+>}/delete", name="app_pins_delete" ,methods={"DELETE","GET"})
+     * @Route("/pins/{id<[0-9]+>}/delete", name="app_pins_delete", methods="DELETE")
      */
 
 
-     public function delete(Pin $pin , EntityManagerInterface $em):Response
+     public function delete(Request $request, Pin $pin , EntityManagerInterface $em):Response
      {
-        $em->remove($pin);
-        $em->flush();
+
+        // dd($request->request->all());
+         if($this->isCsrfTokenValid('pin_deletion_' . $pin->getId(),$request->request->get('csrf_token') )){
+             $em->remove($pin);
+             $em->flush();
+
+         }
 
         return $this->redirectToRoute('app_home');
      }
