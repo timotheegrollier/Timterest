@@ -7,10 +7,5 @@
 		Edit Pin #
 		{{pin.id}}
 	</h1>
-	{{form_start(form)}}
-
-	{{form_widget(form)}}
-
-	<input type="submit" value="Update" formnovalidate>
-	{{form_end(form)}}
+	{{include('pins/_form.html.twig',{submitButtonText: 'Update'})}}
 {% endblock %}
