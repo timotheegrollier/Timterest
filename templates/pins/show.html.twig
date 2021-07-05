@@ -13,7 +13,6 @@
 	</article>
 	<a href=" {{path('app_pins_edit', {id:pin.id})}} ">Edit</a>
 	<a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('delete_form').submit()">Delete</a>
-	<a href=" {{path('app_home')}} ">Go Back</a>
 
 
 	<form id="delete_form" method="post" style="display:none;" action="{{path('app_pins_delete', {id:pin.id})}}">
