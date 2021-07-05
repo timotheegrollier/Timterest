@@ -4,6 +4,10 @@
 @import "~bootstrap/scss/bootstrap";
 
 // FLASH MESSAGES
+body {
+	background-color: lightgray;
+	font-family: $primary-font, sans-serif;
+}
 .alert {
 	padding: 10px;
 	color: white;
@@ -22,8 +26,15 @@
 		background: blue;
 	}
 }
+.vich-image {
+	.form-check {
+		@extend .mt-3;
+	}
 
-body {
-	background-color: lightgray;
-	font-family: $primary-font, sans-serif;
+	img {
+		@extend .mb-2;
+		@extend .rounded;
+		@extend .shadow;
+		@extend .img-thumbnail;
+	}
 }
