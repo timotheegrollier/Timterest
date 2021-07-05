@@ -12,6 +12,9 @@ class PinType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $isEdit = $options['method'] === 'PUT';
+        $imageFileConstraints = [];
+
         $builder
         ->add('imageFile', VichImageType::class, [
             'required' => false,
@@ -20,6 +23,7 @@ class PinType extends AbstractType
             'download_uri' => true,
             'image_uri' => true,
             'asset_helper' => true,
+            
         ])
 
             ->add('title')
