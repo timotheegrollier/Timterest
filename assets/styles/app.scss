@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import "shared/variables";
+
+@import "~bootstrap/scss/bootstrap";
+
+// FLASH MESSAGES
+.alert {
+	padding: 10px;
+	color: white;
+	text-align: center;
+	margin: 0;
+	border: none;
+	border-radius: 0;
+
+	&.alert-success {
+		background-color: green;
+	}
+	&.alert-error {
+		background: red;
+	}
+	&.alert-info {
+		background: blue;
+	}
+}
+
+body {
+	background-color: lightgray;
+	font-family: $primary-font, sans-serif;
+}
