@@ -24,3 +24,7 @@ $(document).ready(function () {
 
 
 
+$('.custom-file-input').on('change', (e) => {
+    let inputFile = e.currentTarget;
+    $(inputFile).parent().find('.custom-file-label').html(inputFile.files[0].name)
+})
