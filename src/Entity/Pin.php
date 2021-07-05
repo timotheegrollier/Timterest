@@ -24,7 +24,7 @@ class Pin
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Title can't be blank")
+     * @Assert\NotBlank(message="Veuillez renseignez un titre !")
      * @Assert\Length(min=3)
      * 
      */
@@ -50,7 +50,7 @@ class Pin
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -62,7 +62,7 @@ class Pin
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
