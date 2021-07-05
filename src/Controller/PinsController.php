@@ -6,12 +6,13 @@ use App\Entity\Pin;
 use App\Form\PinType;
 use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PinsController extends AbstractController
 {
@@ -75,6 +76,13 @@ class PinsController extends AbstractController
     {
 
         $form = $this->createFormBuilder($pin,["method"=>"PUT"])
+        ->add('imageFile', VichImageType::class, [
+            'label' => 'Image (JPG or PNG file)',
+            'required' => false,
+            'allow_delete' => true,
+            'download_uri' => false,
+            'image_uri' => true,
+        ])
         ->add('title',TextType::class)
         ->add('description',TextareaType::class)
         ->getForm()
