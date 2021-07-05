@@ -83,7 +83,7 @@ class PinsController extends AbstractController
             'allow_delete' => true,
             'download_uri' => false,
             'image_uri' => true,
-
+            'imagine_pattern'=>'squared_thumbnail_small'
         ])
         ->add('title',TextType::class)
         ->add('description',TextareaType::class)
