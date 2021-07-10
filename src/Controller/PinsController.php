@@ -30,7 +30,7 @@ class PinsController extends AbstractController
             if ($_COOKIE['rem'] == 1) {
                 session_start();
                 session_abort();
-                session_set_cookie_params(3600);
+                session_set_cookie_params(26280028);
                 // dd('fuck');
                 unset($_COOKIE['rem']);
                 setcookie('rem', '', time() - 3600, '/');
