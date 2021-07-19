@@ -44,13 +44,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName ): ?Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
 
-    /**@var \Symfony\Component\HttpFoundation\Session\Session $session */
+        /**@var \Symfony\Component\Security\Core\Authentication\Token $token */
+        /**@var \Symfony\Component\HttpFoundation\Session\Session $session */
+        $session = $request->getSession();
 
-    $session = $request->getSession();
-        $session->getFlashBag()->add('success','Connecté avec succès !');
+        $session->getFlashBag()->add('success', 'Bienvenue ' . $token->getUser()->getFullName() .  ' !');
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
@@ -60,9 +61,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
 
         //FOR REMEMBER ME FEATURE 
-        
-        if(isset($_POST['_remember_me'])){
-            setcookie('rem','1');
+
+        if (isset($_POST['_remember_me'])) {
+            setcookie('rem', '1');
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
