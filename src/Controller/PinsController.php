@@ -31,7 +31,6 @@ class PinsController extends AbstractController
                 session_start();
                 session_abort();
                 session_set_cookie_params(26280028);
-                // dd('fuck');
                 unset($_COOKIE['rem']);
                 setcookie('rem', '', time() - 3600, '/');
             }
@@ -57,8 +56,8 @@ class PinsController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $johnDoe = $userRepository->findOneBy(['email' => 'john@example.com']);
-            $pin->setUser($johnDoe);
+            // $johnDoe = $userRepository->findOneBy(['email' => 'john@example.com']);
+            $pin->setUser($this->getUser());
             $em->persist($pin);
             $em->flush();
             $this->addFlash('success', 'Pin successfully created !');
