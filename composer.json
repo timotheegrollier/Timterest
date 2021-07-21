@@ -97,7 +97,9 @@
         ],
         "compose":[
             "php bin/console doctrine:migrations:migrate"
-        ]
+        ],
+        "heroku-postbuild" : "node_modules/.bin/encore production"
+
     },
     "conflict": {
         "symfony/symfony": "*"
