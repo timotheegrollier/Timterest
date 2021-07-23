@@ -7,24 +7,14 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
+const $ = require('jquery');
+
+import 'bootstrap';
+import bsCustomFileInput from 'bs-custom-file-input';
+
+import './bootstrap';
+import { Tooltip, Toast, Popover } from 'bootstrap';
 
 // start the Stimulus application
-const $ = require('jquery');
-// this "modifies" the jquery module: adding behavior to it
-// the bootstrap module doesn't export/return anything
-require('bootstrap');
-
-// or you can include specific pieces
-// require('bootstrap/js/dist/tooltip');
-// require('bootstrap/js/dist/popover');
-
-$(document).ready(function () {
-    $('[data-toggle="popover"]').popover();
-});
-
-
-
-$('.custom-file-input').on('change', (e) => {
-    let inputFile = e.currentTarget;
-    $(inputFile).parent().find('.custom-file-label').html(inputFile.files[0].name)
-})
+// import './bootstrap';
+bsCustomFileInput.init();
