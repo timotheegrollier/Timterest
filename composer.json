@@ -96,11 +96,9 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "compose":[
+        "compile":[
             "php bin/console doctrine:migrations:migrate"
-        ],
-        "heroku-postbuild" : "node_modules/.bin/encore production"
-
+        ]
     },
     "conflict": {
         "symfony/symfony": "*"
