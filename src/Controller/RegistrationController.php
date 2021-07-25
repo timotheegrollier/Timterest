@@ -19,15 +19,15 @@ class RegistrationController extends AbstractController
 {
     private $emailVerifier;
 
-// FOR LOGIN AFTER REGISTER
+    // FOR LOGIN AFTER REGISTER
 
     private function authenticateUser(User $user)
-{
-    $providerKey = 'main'; // your firewall name
-    $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+    {
+        $providerKey = 'main'; // your firewall name
+        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
 
-    $this->container->get('security.token_storage')->setToken($token);
-}
+        $this->container->get('security.token_storage')->setToken($token);
+    }
 
     public function __construct(EmailVerifier $emailVerifier)
     {
@@ -41,15 +41,15 @@ class RegistrationController extends AbstractController
     {
 
 
-// CAN'T ACCESS WHERE YOU LOGGED IN
+        // CAN'T ACCESS WHERE YOU LOGGED IN
 
         if ($this->getUser()) {
 
-            $this->addFlash("error","Déja connecté !");
+            $this->addFlash("error", "Déja connecté !");
             return $this->redirectToRoute('app_home');
         }
 
-        
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -70,20 +70,20 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('Timterest@world.eu', 'Timterest'))
-                    ->to($user->getEmail())
-                    ->subject('Veuillez confirmez votre adresse Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
+            // $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            //     (new TemplatedEmail())
+            //         ->from(new Address('Timterest@world.eu', 'Timterest'))
+            //         ->to($user->getEmail())
+            //         ->subject('Veuillez confirmez votre adresse Email')
+            //         ->htmlTemplate('registration/confirmation_email.html.twig')
+            // );
             // do anything else you need here, like send an email
             $this->authenticateUser($user);
 
             setcookie('rem', '1');
             $this->addFlash('success', 'Bienvenue ' . $user->getFullName() .  ' !');
-            
-            
+
+
             return $this->redirectToRoute('app_home');
         }
 
