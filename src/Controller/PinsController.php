@@ -25,7 +25,6 @@ class PinsController extends AbstractController
     {
 
         // FOR REMEMBER ME FEATURE
-        
         if (isset($_COOKIE['rem'])) {
             if ($_COOKIE['rem'] == 1) {
                 session_start();
@@ -37,7 +36,7 @@ class PinsController extends AbstractController
         }
 
         // HOME DISPLAY
-        
+
         $pins = $pinRepository->findBy([], ['createdAt' => 'DESC']);
         return $this->render('pins/index.html.twig', compact("pins"));
     }
@@ -46,7 +45,7 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/create", name="app_pins_create",methods={"GET","POST"})
      */
-    public function create(Request $request, EntityManagerInterface $em, UserRepository $userRepository): Response
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
 
         $pin = new Pin;
